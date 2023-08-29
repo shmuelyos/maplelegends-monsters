@@ -23,6 +23,8 @@ function App() {
 
     const sortByExp = useCallback(() => fetchAndSort('EXP'), [fetchAndSort]);
     const sortByLevel = useCallback(() => fetchAndSort('LEVEL'), [fetchAndSort]);
+    const sortByHP = useCallback(() => fetchAndSort('HP'), [fetchAndSort]);
+    const reverseOrder = useCallback(() => fetchAndSort('Reverse'), [fetchAndSort])
 
     const mobItems = useMemo(() => {
         return data.map((item, index) => (
@@ -90,6 +92,17 @@ function App() {
             >
                 Sort By Level
             </Button>
+            <Button
+                variant="contained"
+                color="primary"
+                onClick={sortByHP}
+            >
+                Sort By HP
+            </Button>
+            <Button onClick={reverseOrder}>
+                reverse
+            </Button>
+
             {isLoading ? (
                 <CircularProgress/>
             ) : data.length > 0 ? (

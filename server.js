@@ -20,6 +20,9 @@ function sortByLevel(arr) {
 function sortByEXP(arr) {
     return arr.sort((m1, m2) => m2.exp - m1.exp);
 }
+function sortByHP(arr) {
+    return arr.sort((m1, m2) => m2.hp - m1.hp);
+}
 
 app.get('/scrape', async (req, res) => {
 
@@ -47,11 +50,22 @@ app.get('/scrape', async (req, res) => {
                 fs.writeFileSync(DATA_FILE, JSON.stringify(sortedByEXP));
                 return;
 
-
             case "LEVEL":
                 const sortedByLevel = sortByLevel(data)
                 res.send(filterData(data, LEVEL_MIN, LEVEL_MAX, COUNT_THRESHOLD))
                 fs.writeFileSync(DATA_FILE, JSON.stringify(sortedByLevel));
+                return;
+
+            case "HP":
+                const sortedByHP = sortByHP(data)
+                res.send(filterData(data, LEVEL_MIN, LEVEL_MAX, COUNT_THRESHOLD))
+                fs.writeFileSync(DATA_FILE, JSON.stringify(sortedByHP));
+                return;
+
+            case "Reverse":
+                const reversed = data.reverse()
+                res.send(filterData(data, LEVEL_MIN, LEVEL_MAX, COUNT_THRESHOLD))
+                fs.writeFileSync(DATA_FILE, JSON.stringify(reversed));
                 return;
 
 
